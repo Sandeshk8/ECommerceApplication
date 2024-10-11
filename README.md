@@ -2,7 +2,6 @@
 
 - The E-Commerce application is developed using Java and Spring Boot, focusing on security, scalability, and maintainability. The backend leverages Spring Data JPA for seamless interaction with a MySQL database, simplifying the management and storage of key entities such as users, products, categories, orders, and more. User authentication is securely managed through Auth0, ensuring a reliable authentication mechanism for the REST APIs.
 
-- The APIs are well-documented and easily accessible through Swagger UI, making it simple for developers to test and understand the various endpoints. Overall, this project provides secure Rest APIs to create a scalable platform for businesses to sell their products to customers.
 
 # Features
 ## Admin:-

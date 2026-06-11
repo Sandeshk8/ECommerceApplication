@@ -1,63 +1,122 @@
-# E-Commerce-Application
+# 🛒 E-Commerce Backend Application
 
-- The E-Commerce application is developed using Java and Spring Boot, focusing on security, scalability, and maintainability. The backend leverages Spring Data JPA for seamless interaction with a MySQL database, simplifying the management and storage of key entities such as users, products, categories, orders, and more. User authentication is securely managed through Auth0, ensuring a reliable authentication mechanism for the REST APIs.
+A robust, secure, and scalable RESTful E-Commerce backend API developed using **Java 17** and **Spring Boot 3.x**.
 
+Developed by **[Sandesh](https://github.com/Sandeshk8/)** 🚀
 
-# Features
-## Admin:-
-- Login
-- Users
-- Address
-- Categories
-- Products
-- Price & discount
-- Orders
-## User:-
-- Registration & Login
-- Fetch categories and products based on category
-- Adding & deleting products to cart
-- Managing address and products quantity
-- Ordering products and fetching order status
+---
 
-# Security
-- The API is secured using JSON Web Tokens (JWT) handled by Auth0. To access the API, you will need to obtain a JWT by authenticating with the /login endpoint. The JWT should then be passed in the Authorize option available in the Swagger-ui.
+## 🎯 Project Purpose
 
-  ### Example:
-  - Authorization: <your_jwt>
+> [!NOTE]  
+> **Practice & Skill Refinement**  
+> This project was developed as a hands-on practice application to brush up on and solidify beginner-to-intermediate **Java** and **Spring Boot** skills. It demonstrates core backend capabilities, database schema modeling, request validation, secure endpoints via JWT authentication, and transactional business logic.
 
-# Technologies:
-- Java 17 or above
-- Spring Boot 3.0
-- Maven
-- MySQL
-- Spring Data JPA
-- Spring Security
-- JSON Web Tokens (JWT)
-- Auth0
-- Swagger UI
+---
 
-# Running the app
-1. Import the project into intellji ide or ide of your choice:
-  - load Maven >  run the junit
-3. Update the values in application.properties with your MySQL database connection details.
-4. Run the app: navigate to main class and run the application.
+## 🌟 Key Features
 
-# API documentation
-- API documentation is available via Swagger UI at http://localhost:8080/swagger-ui/index.html
+### 👤 User Capabilities
+- **Auth & Onboarding:** Secure Registration & Login using JSON Web Tokens (JWT) and Auth0.
+- **Product Catalog:** Browse categories and view list of products belonging to specific categories.
+- **Cart Management:** Add products to cart, update quantities, remove products, and automatically calculate discounts/special prices.
+- **Order Placement:** Order products from the cart, select payment methods, and monitor order status.
+- **Address Management:** Store and associate multiple delivery addresses to user profiles.
 
-# ER-Diagram
-<img width="605" alt="ER-Diagram" src="https://user-images.githubusercontent.com/101395494/216134703-e7cefef6-187f-44df-9fd4-52aedc66d24b.png">
+### 🛡️ Admin Capabilities
+- **User Management:** Full administration over user records and access roles.
+- **Inventory Controls:** Add, update, and delete products (including uploading product images).
+- **Categories Control:** Manage product categories.
+- **Order Tracking:** Retrieve and update order processing status (e.g., set order status from "Order Accepted" to shipped).
 
-# Swagger-ui
-<img width="947" alt="Swagger-UI" src="https://user-images.githubusercontent.com/101395494/216388614-f8eed33e-cbbb-4cfa-997e-b76674bbb465.png">
+---
 
-# API Controllers
-<img width="947" alt="Auth_Controller" src="https://user-images.githubusercontent.com/101395494/216388749-4f15d968-ae52-48a9-9c08-0b72d608084a.png">
-<img width="947" alt="User_Controller" src="https://user-images.githubusercontent.com/101395494/216755281-ebacb2a4-3f02-4d41-a695-d508ee537db1.png">
-<img width="947" alt="Address_Controller" src="https://user-images.githubusercontent.com/101395494/216388840-0a31a552-63e3-4b10-9fab-c6c705cd7af4.png">
-<img width="947" alt="Cart_Controller" src="https://user-images.githubusercontent.com/101395494/216388895-736fa8c1-7784-4d4d-8768-c619e6fd0e6f.png">
-<img width="947" alt="Category_Controller" src="https://user-images.githubusercontent.com/101395494/216388926-88c45391-d35b-4359-b239-86acb63ccb6b.png">
-<img width="947" alt="Product_Controller" src="https://user-images.githubusercontent.com/101395494/216755314-56904892-4a1d-4bc3-b40d-b9d76525ec83.png">
-<img width="947" alt="Order_Controller" src="https://user-images.githubusercontent.com/101395494/216388971-7d654a8e-6abc-4548-80c6-8d1173f56bc4.png">
+## 🛠️ Technology Stack & Libraries
 
-# Thank You
+- **Language:** Java 17
+- **Framework:** Spring Boot 3.0 (Spring MVC, Spring Security, Spring Data JPA)
+- **Database:** MySQL
+- **ORM / Persistence:** Hibernate / JPA
+- **Security:** JSON Web Tokens (JWT) & Auth0 Integration, BCrypt Hashing
+- **Utilities:** ModelMapper (Entity to DTO conversion), Lombok (boilerplate reduction), Jakarta Validation (input sanitization)
+- **Documentation:** OpenAPI 3.0 & Swagger UI
+
+---
+
+## 🏗️ Architecture & Low-Level Design (LLD)
+
+This project adopts clean architectural guidelines to enforce a separation of concerns:
+
+- **Layered (3-Tier) Architecture:** Organized into Presentation (Controllers), Business Logic (Services), and Data Access (Repositories) layers to ensure decoupled components.
+- **Data Transfer Object (DTO) Pattern:** Decouples internal database entities from external API contracts to protect sensitive database layouts.
+- **Chain of Responsibility Pattern:** Implemented via Spring Security Filter Chains, validating JWT auth credentials before requests hit internal endpoints.
+- **Global Interceptor Pattern:** Utilizes `@RestControllerAdvice` to handle exceptions globally and return unified error response shapes (`APIResponse`).
+- **Singleton Design Pattern:** Leverages Spring's Inversion of Control (IoC) container to manage and inject thread-safe singleton beans.
+- **ACID Transaction Management:** Implemented via `@Transactional` to guarantee database consistency during multi-step procedures like checking out and updating product stock.
+
+---
+
+## 🚀 Future Roadmap
+
+To keep leveling up my Spring Boot & backend development skills, here is what I plan to build next:
+- [ ] **Dockerization:** Containerize the Spring Boot application and MySQL database using Docker Compose for easier setup.
+- [ ] **Comprehensive Testing:** Add unit and integration tests using JUnit 5, Mockito, and Testcontainers.
+- [ ] **CI/CD Pipeline:** Set up GitHub Actions to run tests automatically on every push.
+- [ ] **Frontend Integration:** Build a React or Next.js app to consume these APIs and make a full-stack project.
+
+---
+
+## 📊 Database Schema (ER-Diagram)
+
+The application models relationships including:
+- `User` ⇄ `Role` (**Many-to-Many**)
+- `User` ⇄ `Address` (**Many-to-Many**)
+- `User` ⇄ `Cart` (**One-to-One**)
+- `Category` ⇄ `Product` (**One-to-Many**)
+- `Cart` ⇄ `CartItem` (**One-to-Many**)
+- `Order` ⇄ `OrderItem` (**One-to-Many**)
+- `Order` ⇄ `Payment` (**One-to-One**)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Java JDK 17** or higher
+- **Maven** 3.x
+- **MySQL Database Server**
+
+### Step-by-Step Setup
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/Sandeshk8/ECommerceApplication.git
+   cd ECommerceApplication
+   ```
+
+2. **Configure Database:**
+   Open [application.properties](file:///c:/Users/sande/Desktop/Github%20projects/ECommerceApplication/src/main/resources/application.properties) and update the MySQL datasource details to point to your local database instance:
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce_db?useSSL=false&serverTimezone=UTC
+   spring.datasource.username=your_mysql_username
+   spring.datasource.password=your_mysql_password
+   ```
+
+3. **Build the Application:**
+   ```bash
+   mvn clean install
+   ```
+
+4. **Run the Application:**
+   Run the main class [ECommerceApplication.java](file:///c:/Users/sande/Desktop/Github%20projects/ECommerceApplication/src/main/java/com/app/ECommerceApplication.java) directly in your IDE, or run via command line:
+   ```bash
+   mvn spring-boot:run
+   ```
+
+---
+
+## 📖 API Documentation & Swagger UI
+
+Once the application is running, access the interactive API Swagger documentation to test endpoints directly:
+
+🔗 **Swagger UI:** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
